@@ -16,7 +16,7 @@ router.use((req:Request,res:Response,next:NextFunction)=>{
             }
             else{
                 req.body.decode = decode;
-                console.log(decode);
+                
                 next();
             }
         });
@@ -31,8 +31,9 @@ router.use((req:Request,res:Response,next:NextFunction)=>{
 
 });
 
-router.get('/fecha/:fecha',noticiasController.BuscarNoticiasFecha);
-router.get('/fuente/:fuente/fecha/:fecha',noticiasController.BuscarNoticiasFuenteFecha);
-router.get('/noticiaOriginal/:idNoticias',noticiasController.BuscarNoticiaIDMONGO);
+router.post('/fecha/:fecha',noticiasController.BuscarNoticiasFecha);
+router.post('/fuente/:fuente/fecha/:fecha',noticiasController.BuscarNoticiasFuenteFecha);
+router.post('/noticiaOriginal/:idNoticias',noticiasController.BuscarNoticiaIDMONGO);
+router.post('/cantidadNoticias',noticiasController.CantidadNoticias)
 
 export default router;

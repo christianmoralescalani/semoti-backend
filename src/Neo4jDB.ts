@@ -2,7 +2,7 @@ import { v1 as neo4j } from 'neo4j-driver';
 import dotenv from 'dotenv';
 import { Session, Driver, StatementResult } from 'neo4j-driver/types/v1';
 
-dotenv.config();
+//dotenv.config();
 
 
 class Neo4jDB {

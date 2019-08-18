@@ -68,6 +68,23 @@ class NoticiasController {
         }
         
     }
+    async CantidadNoticias(req: Request, res: Response) {
+        
+        const cantidad = await noticiaSchema.estimatedDocumentCount();
+        if(cantidad>0){
+            res.json({
+                status: "Correcto",
+                mensaje: cantidad
+            });
+        }else{
+            res.json({
+                status: "Error",
+                mensaje: "No se pudo encontrar el número de noticias"
+            });
+        }
+        
+
+    }
 
    
 }

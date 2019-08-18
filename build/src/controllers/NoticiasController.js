@@ -83,6 +83,23 @@ class NoticiasController {
             }
         });
     }
+    CantidadNoticias(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const cantidad = yield NoticiasModel_1.noticiaSchema.estimatedDocumentCount();
+            if (cantidad > 0) {
+                res.json({
+                    status: "Correcto",
+                    mensaje: cantidad
+                });
+            }
+            else {
+                res.json({
+                    status: "Error",
+                    mensaje: "No se pudo encontrar el número de noticias"
+                });
+            }
+        });
+    }
 }
 const noticiasController = new NoticiasController();
 exports.noticiasController = noticiasController;

@@ -1,8 +1,8 @@
 import mongoose, { mongo } from 'mongoose';
 import dotenv from 'dotenv';
-dotenv.config();
+//dotenv.config();
 class MongoDB {
-
+    
     URI: string = `${process.env.URI_MONGO}`;
     constructor() {
 
@@ -10,6 +10,7 @@ class MongoDB {
 
     }
     start() {
+        console.log(this.URI);
         mongoose.connect(this.URI, { useNewUrlParser: true }).then(db => console.log(`MongoDB is connect`));
     }
 }

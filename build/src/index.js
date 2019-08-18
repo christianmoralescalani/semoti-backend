@@ -5,8 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
-const cors_1 = __importDefault(require("cors"));
-const dotenv_1 = __importDefault(require("dotenv"));
 const helmet_1 = __importDefault(require("helmet"));
 const database_1 = __importDefault(require("./database"));
 const NoticiasRoutes_1 = __importDefault(require("./routes/NoticiasRoutes"));
@@ -14,15 +12,20 @@ const UsuariosRoutes_1 = __importDefault(require("./routes/UsuariosRoutes"));
 const SemanticaRoutes_1 = __importDefault(require("./routes/SemanticaRoutes"));
 //Initializacion
 const app = express_1.default();
-dotenv_1.default.config();
+//dotenv.config();
 database_1.default.start();
 //Middlewares
+app.use(express_1.default.static('public'));
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
 //app.use(express.urlencoded({extended:true}));
-app.use(cors_1.default({
-    origin: `http://${process.env.FRONT_IP}`
-}));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
 app.use(helmet_1.default());
 //Configuration
 app.set('PORT', process.env.PORT || 3000);

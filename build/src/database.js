@@ -4,14 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+//dotenv.config();
 class MongoDB {
     constructor() {
         this.URI = `${process.env.URI_MONGO}`;
         mongoose_1.default.set('useFindAndModify', true);
     }
     start() {
+        console.log(this.URI);
         mongoose_1.default.connect(this.URI, { useNewUrlParser: true }).then(db => console.log(`MongoDB is connect`));
     }
 }

@@ -10,7 +10,7 @@ class SemanticaController {
 
 
     async ObtenerCategoriasID(req: Request, res: Response) {
-        console.log(req.body.id);
+        
         const id = req.body.id;
         const categorias = await semanticaModel.ObtenerCategoriasID(id);
         res.json(categorias);

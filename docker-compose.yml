@@ -1,0 +1,26 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - neo4j
+  mongo:
+    container_name: mongo
+    image: mongo:3.5
+    volumes: 
+      - /home/christian/Escritorio/data/mongo:/data/db
+    ports:
+      - "27017:27017"
+  neo4j:
+    container_name: neo4j
+    image: neo4j:3.5
+    volumes:
+      - /home/christian/Escritorio/data/neo4j:/data
+    ports:
+      - "7474:7474"
+      - "7687:7687"

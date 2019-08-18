@@ -15,7 +15,6 @@ const SemanticaModel_1 = __importDefault(require("../models/SemanticaModel"));
 class SemanticaController {
     ObtenerCategoriasID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.body.id);
             const id = req.body.id;
             const categorias = yield SemanticaModel_1.default.ObtenerCategoriasID(id);
             res.json(categorias);

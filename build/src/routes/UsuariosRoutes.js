@@ -6,5 +6,5 @@ const router = express_1.Router();
 router.post('/IniciarSesion', UsuariosController_1.usuariosController.IniciarSesion);
 router.post('/RegistroLocal', UsuariosController_1.usuariosController.RegistroLocal);
 //router.get('/:id',usuariosController.BuscarUsuarioID);
-//router.post('/crear',usuariosController.RegistrarseGoogleID);
+router.post('/RegistroGoogle', UsuariosController_1.usuariosController.RegistroGoogle);
 exports.default = router;

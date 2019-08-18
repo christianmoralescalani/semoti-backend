@@ -7,5 +7,5 @@ const router:Router = Router();
 router.post('/IniciarSesion',usuariosController.IniciarSesion);
 router.post('/RegistroLocal',usuariosController.RegistroLocal);
 //router.get('/:id',usuariosController.BuscarUsuarioID);
-//router.post('/crear',usuariosController.RegistrarseGoogleID);
+router.post('/RegistroGoogle',usuariosController.RegistroGoogle);
 export default router;

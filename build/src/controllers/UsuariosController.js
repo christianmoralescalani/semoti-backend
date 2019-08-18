@@ -57,6 +57,39 @@ class UsuariosController {
             }
         });
     }
+    RegistroGoogle(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { usuario, contrasena } = req.body;
+            const resultado = yield UsuariosModels_1.default.findOne({ usuario, contrasena });
+            if (resultado) {
+                const token = jsonwebtoken_1.default.sign({ resultado }, req.app.get('SECRETJWT'));
+                res.json({
+                    status: "Correcto",
+                    mensaje: {
+                        token
+                    }
+                });
+            }
+            else {
+                const usuarioNuevo = yield new UsuariosModels_1.default({ usuario, contrasena }).save();
+                if (usuarioNuevo) {
+                    const token = jsonwebtoken_1.default.sign({ resultado }, req.app.get('SECRETJWT'));
+                    res.json({
+                        status: "Correcto",
+                        mensaje: {
+                            token
+                        }
+                    });
+                }
+                else {
+                    res.json({
+                        status: "Fallido",
+                        mensaje: "Error al guardar el usuario"
+                    });
+                }
+            }
+        });
+    }
 }
 const usuariosController = new UsuariosController();
 exports.usuariosController = usuariosController;
