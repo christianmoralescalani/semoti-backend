@@ -120,10 +120,10 @@ class SemanticaModel {
         console.log(palabras);
         return consulta;
     }
-    async BusquedaCadena(cadena:string){
+    async BusquedaCadena(cadena: string) {
         const neo = new neo4j();
         const consulta = await this.Cadena(cadena);
-        const resultado:any[] = [];
+        const resultado: any[] = [];
         let resp = await neo.Run(consulta);
         const campos = resp.records;
         for (let i = 0; i < campos.length; i++) {
@@ -139,18 +139,44 @@ class SemanticaModel {
         return resultado;
     }
 
-    DividirCadena(cadena:string){
+    DividirCadena(cadena: string) {
         let arrayPalabras = cadena.split('>');
         return arrayPalabras;
     }
-    AgregarCondicionales(palabra:string) {
+    AgregarCondicionales(palabra: string) {
         let consulta = ` tolower(b.name) CONTAINS tolower("${palabra}") or tolower(c.name) CONTAINS tolower("${palabra}") `;
         return consulta;
     }
-     AgregarCondicionalesPrimero(palabra:string) {
+    AgregarCondicionalesPrimero(palabra: string) {
         let consulta = ` or tolower(b.name) CONTAINS tolower("${palabra}") or tolower(c.name) CONTAINS tolower("${palabra}") `;
         return consulta;
     }
+    async CompararNoticias(id_noticia: string) {
+        const neo = new neo4j();
+
+        const categoriasComparar: any[] = [];
+        const noticiasEncontradas: any[]= [];
+        let resultado = await neo.Run(`match (a:Noticia)-[r:PerteneceCategoria]-(b:CategoriaNoticia) where a.id = '${id_noticia}' return b.name`);
+        const campos = resultado.records;
+        for (let i = 0; i < campos.length; i++) {
+            let categorias2 = campos[i].get('b.name');
+            categoriasComparar.push(categorias2);
+        }
+        for (let i = 0; i < categoriasComparar.length; i++) {
+            let res = await neo.Run(`match (a:Noticia)-[r:PerteneceCategoria]-(b:CategoriaNoticia) where b.name = '${categoriasComparar[i]}' return DISTINCT a.name,a.id`);
+            const camp = res.records;
+            for (let i = 0; i < camp.length; i++) {
+                const obj = {
+                    titulo : camp[i].get('a.name'),
+                    id: camp[i].get('a.id')
+                }
+                noticiasEncontradas.push(obj);
+            }
+        }
+        await neo.Close();
+        return noticiasEncontradas;
+    }
+
 
 
 

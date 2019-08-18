@@ -6,6 +6,9 @@ import { Session, Driver, StatementResult } from 'neo4j-driver/types/v1';
 
 
 class Neo4jDB {
+    /*URI: string = `bolt://localhost`;
+    USUARIO: string = `neo4j`;
+    CONTRASENA: string = `mora`;*/
     URI: string = `${process.env.URI_NEO4J}`;
     USUARIO: string = `${process.env.NEO4J_USER}`;
     CONTRASENA: string = `${process.env.NEO4J_PASSWORD}`;

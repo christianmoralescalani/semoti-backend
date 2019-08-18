@@ -38,5 +38,6 @@ router.post('/conceptos',semanticaController.ObtenerConeptosID);
 router.post('/expresiones',semanticaController.ObtenerExpresionesID);
 router.post('/cadena',semanticaController.Cadena);
 router.post('/busquedaCadena',semanticaController.BusquedaCadena);
+router.post('/compararNoticia',semanticaController.CompararNoticias);
 
 export default router;

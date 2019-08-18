@@ -33,6 +33,7 @@ app.use(helmet());
 //Configuration
 app.set('PORT', process.env.PORT || 3000);
 app.set('SECRETJWT',process.env.SECRET_JWT);
+//app.set('SECRETJWT','asdf');
 //Importing Routes
 app.use('/noticias',noticiasRoutes);
 app.use('/usuarios',usuarioRoutes);

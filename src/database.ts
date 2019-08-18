@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 //dotenv.config();
 class MongoDB {
     
+    //URI: string = `mongodb://localhost/proyecto`;
     URI: string = `${process.env.URI_MONGO}`;
     constructor() {
 
